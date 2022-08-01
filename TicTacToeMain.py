@@ -71,6 +71,41 @@ def onePlayer():
 def twoPlayer():
     ticTacToegame = TicTacToe(2)
     playersTurn = ticTacToegame.getRandomStart()
+    TopLeft = Button(image=None, pos=(125, 120),
+                           textInput="---", font=getFont(75),
+                           baseColor=BLACK, hoveringColor=GREEN)
+        
+    TopMiddle = Button(image=None, pos=(300, 120),
+                           textInput="---", font=getFont(75),
+                           baseColor=BLACK, hoveringColor=GREEN)
+
+    TopRight = Button(image=None, pos=(475, 120),
+                           textInput="---", font=getFont(75),
+                           baseColor=BLACK, hoveringColor=GREEN)
+
+    MiddleLeft = Button(image=None, pos=(125, 250),
+                           textInput="---", font=getFont(75),
+                           baseColor=BLACK, hoveringColor=GREEN)
+        
+    Middle = Button(image=None, pos=(300, 250),
+                           textInput="---", font=getFont(75),
+                           baseColor=BLACK, hoveringColor=GREEN)
+
+    MiddleRight = Button(image=None, pos=(475, 250),
+                           textInput="---", font=getFont(75),
+                           baseColor=BLACK, hoveringColor=GREEN)
+
+    BottomLeft = Button(image=None, pos=(125, 390),
+                           textInput="---", font=getFont(75),
+                           baseColor=BLACK, hoveringColor=GREEN)
+        
+    BottomMiddle = Button(image=None, pos=(300, 390),
+                           textInput="---", font=getFont(75),
+                           baseColor=BLACK, hoveringColor=GREEN)
+
+    BottomRight = Button(image=None, pos=(475, 390),
+                           textInput="---", font=getFont(75),
+                           baseColor=BLACK, hoveringColor=GREEN)
     while True:
         # global mouse position
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
@@ -86,43 +121,6 @@ def twoPlayer():
         PLAY_RECT = PLAY_TEXT.get_rect(center=(320, 40))
         SCREEN.blit(PLAY_TEXT, PLAY_RECT)
 
-
-        TopLeft = Button(image=None, pos=(125, 120),
-                           textInput="---", font=getFont(75),
-                           baseColor=BLACK, hoveringColor=GREEN)
-        
-        TopMiddle = Button(image=None, pos=(300, 120),
-                           textInput="---", font=getFont(75),
-                           baseColor=BLACK, hoveringColor=GREEN)
-
-        TopRight = Button(image=None, pos=(475, 120),
-                           textInput="---", font=getFont(75),
-                           baseColor=BLACK, hoveringColor=GREEN)
-
-        MiddleLeft = Button(image=None, pos=(125, 250),
-                           textInput="---", font=getFont(75),
-                           baseColor=BLACK, hoveringColor=GREEN)
-        
-        Middle = Button(image=None, pos=(300, 250),
-                           textInput="---", font=getFont(75),
-                           baseColor=BLACK, hoveringColor=GREEN)
-
-        MiddleRight = Button(image=None, pos=(475, 250),
-                           textInput="---", font=getFont(75),
-                           baseColor=BLACK, hoveringColor=GREEN)
-
-        BottomLeft = Button(image=None, pos=(125, 390),
-                           textInput="---", font=getFont(75),
-                           baseColor=BLACK, hoveringColor=GREEN)
-        
-        BottomMiddle = Button(image=None, pos=(300, 390),
-                           textInput="---", font=getFont(75),
-                           baseColor=BLACK, hoveringColor=GREEN)
-
-        BottomRight = Button(image=None, pos=(475, 390),
-                           textInput="---", font=getFont(75),
-                           baseColor=BLACK, hoveringColor=GREEN)
-        
 
         pygame.draw.line(SCREEN, BLACK, (400, 60), (400, 460), 4)
         pygame.draw.line(SCREEN, BLACK, (200, 60), (200, 460), 4)
@@ -163,6 +161,7 @@ def twoPlayer():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if TopLeft.checkForInput(PLAY_MOUSE_POS):
                     if playersTurn == 0:
+                        TopLeft.updateText("X")
                         playersTurn = 1
                     else:
                         playersTurn = 0
