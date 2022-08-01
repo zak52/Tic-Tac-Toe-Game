@@ -3,14 +3,14 @@ import random
 
 #global variables
 
-NUM_PLAYERS = 0
+
 
 
 class TicTacToe():
 
     def __init__(self, numOfPlayers):
         self.board = GAME_BOARD = []
-        NUM_PLAYERS = numOfPlayers
+        self.numberOfPlayers = numOfPlayers
         self.winnerOfGame = -1
 
     def createBoard(self):
@@ -76,6 +76,18 @@ class TicTacToe():
                     if self.board[i][i] != playerInput:
                         winner = -1
                         endGame = False
+                        break
+                if endGame:
+                    print (winner)
+                    self.winnerOfGame = winner
+                    return endGame
+
+                endGame = True
+                winner = player
+                for i in range(lengthOfBoard):
+                    if self.board[i][lengthOfBoard - 1 - i] != playerInput:
+                        endGame = False
+                        winner = -1
                         break
                 if endGame:
                     print (winner)

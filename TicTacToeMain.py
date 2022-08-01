@@ -35,32 +35,42 @@ END_BG = pygame.image.load("assets/gameOverBackGround.jpeg")
 
 # end game Screen
 def endGame(winner):
-    
+
+    # runs the end game screen until either it switches back to menu or they quit the game
     while True:
+        # sets the background of the screen with the end background picture
         SCREEN.blit(END_BG, (0, 0))
 
         END_GAME_MOUSE_POS = pygame.mouse.get_pos()
 
+        # sees if the winner is player 1, 2 or if its a tie between the players
         if winner == 0:
             END_GAME_TEXT = getFont(75).render("Player One Won!!", True, "#b68f40")
         elif winner == 1:
             END_GAME_TEXT = getFont(75).render("Player Two Won!!", True, "#b68f40")
         elif winner == -1:
             END_GAME_TEXT = getFont(75).render("TIE GAME!!!", True, "#b68f40")
-        
+
+        # Creates a rectangle around the text the displays whos the winner
         END_RECT = END_GAME_TEXT.get_rect(center=(320, 100))
 
+        # a button that allows the user to go back to the main menu
         PLAY_AGAIN_BUTTON = Button(image=pygame.image.load("assets/Player_Rect.png"), pos=(320, 300), 
                             textInput="PLAY AGAIN", font=getFont(50), baseColor="#d7fcd4", hoveringColor="White", beenClicked=False)
+
+        # Button allows them to quit the game
         QUIT_BUTTON = Button(image=pygame.image.load("assets/Quit_Rect.png"), pos=(320, 440), 
                             textInput="QUIT", font=getFont(50), baseColor="#d7fcd4", hoveringColor="White", beenClicked=False)
 
+        # displays the winner to the screen 
         SCREEN.blit(END_GAME_TEXT, END_RECT)
 
+        # displays both created buttons on the screen
         for button in [PLAY_AGAIN_BUTTON, QUIT_BUTTON]:
             button.changeColor(END_GAME_MOUSE_POS)
             button.update(SCREEN)
-        
+
+        # runs through the pygame to see what the user selects
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -71,7 +81,7 @@ def endGame(winner):
                 if QUIT_BUTTON.checkForInput(END_GAME_MOUSE_POS):
                     pygame.quit()
                     sys.exit()
-
+                    
         pygame.display.update()
 # takes in the size of the font and returns the font for the game
 def getFont(size):
@@ -79,6 +89,23 @@ def getFont(size):
 
 # runs this function if only playing against CPU
 def onePlayer():
+    # creates a tictactoe game with 1 players
+    ticTacToegame = TicTacToe(1)
+    # selects which user will go first
+    playersTurn = ticTacToegame.getRandomStart()
+    # creates the tictactoe board
+    ticTacToegame.createBoard()
+
+    # buttons to see if any of the buttons of the game board have been clicked
+    TopLeftClicked = False
+    TopMiddleClicked = False
+    TopRightClicked = False
+    MiddleLeftClicked = False
+    MiddleClicked = False
+    MiddleRightClicked = False
+    BottomLeftClicked = False
+    BottomMiddleClicked = False
+    BottomRightClicked = False
     while True:
         # global mouse position
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
@@ -92,7 +119,7 @@ def onePlayer():
 
         PLAY_BACK = Button(image=None, pos=(340, 340),
                            textInput="BACK", font=getFont(75),
-                           baseColor=BLACK, hoveringColor=GREEN)
+                           baseColor=BLACK, hoveringColor=GREEN, beenClicked = False)
 
         PLAY_BACK.changeColor(PLAY_MOUSE_POS)
         PLAY_BACK.update(SCREEN)
@@ -109,10 +136,14 @@ def onePlayer():
 
 # runs this function if playing PVP
 def twoPlayer():
+    # creates a tictactoe game with 2 players
     ticTacToegame = TicTacToe(2)
+    # selects which user will go first
     playersTurn = ticTacToegame.getRandomStart()
+    # creates the tictactoe board
     ticTacToegame.createBoard()
 
+    # buttons to see if any of the buttons of the game board have been clicked
     TopLeftClicked = False
     TopMiddleClicked = False
     TopRightClicked = False
@@ -122,22 +153,28 @@ def twoPlayer():
     BottomLeftClicked = False
     BottomMiddleClicked = False
     BottomRightClicked = False
-    
+
+    # runs the game for PVP
     while True:
-        # global mouse position
+        
+        # play mouse position
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
 
+        # sets backgound color to white
         SCREEN.fill(WHITE)
         
 
+        # displays who turn it is at the top of the screen
         if playersTurn == 0:
             PLAY_TEXT = getFont(25).render("It is Player One's Turn:", True, BLACK)
         else:
             PLAY_TEXT = getFont(25).render("It is Player Two's Turn:", True, BLACK)
 
+        # displays the text of whos turn it is
         PLAY_RECT = PLAY_TEXT.get_rect(center=(320, 40))
         SCREEN.blit(PLAY_TEXT, PLAY_RECT)
 
+        # buttons for all of the board spaces on the tictactoe board
         TopLeft = Button(image=None, pos=(125, 120),
                            textInput=ticTacToegame.getStringAtCoordinate(0,0), font=getFont(75),
                            baseColor=BLACK, hoveringColor=GREEN, beenClicked=TopLeftClicked)
@@ -174,38 +211,19 @@ def twoPlayer():
                                textInput=ticTacToegame.getStringAtCoordinate(2,2), font=getFont(75),
                                baseColor=BLACK, hoveringColor=GREEN, beenClicked=BottomRightClicked)
 
+        # draws the game board for tictactoe
         pygame.draw.line(SCREEN, BLACK, (400, 60), (400, 460), 4)
         pygame.draw.line(SCREEN, BLACK, (200, 60), (200, 460), 4)
         pygame.draw.line(SCREEN, BLACK, (75, 180), (525, 180), 4)
         pygame.draw.line(SCREEN, BLACK, (75, 320), (525, 320), 4)
 
-        TopLeft.changeColor(PLAY_MOUSE_POS)
-        TopLeft.update(SCREEN)
-
-        TopMiddle.changeColor(PLAY_MOUSE_POS)
-        TopMiddle.update(SCREEN)
-
-        TopRight.changeColor(PLAY_MOUSE_POS)
-        TopRight.update(SCREEN)
-
-        MiddleLeft.changeColor(PLAY_MOUSE_POS)
-        MiddleLeft.update(SCREEN)
-
-        Middle.changeColor(PLAY_MOUSE_POS)
-        Middle.update(SCREEN)
-
-        MiddleRight.changeColor(PLAY_MOUSE_POS)
-        MiddleRight.update(SCREEN)
-
-        BottomLeft.changeColor(PLAY_MOUSE_POS)
-        BottomLeft.update(SCREEN)
-
-        BottomMiddle.changeColor(PLAY_MOUSE_POS)
-        BottomMiddle.update(SCREEN)
-
-        BottomRight.changeColor(PLAY_MOUSE_POS)
-        BottomRight.update(SCREEN)
-
+        # displays all the buttons on the gameboard
+        for button in [TopLeft, TopMiddle, TopRight, MiddleLeft, Middle, MiddleRight,
+                       BottomLeft, BottomMiddle, BottomRight]:
+            button.changeColor(PLAY_MOUSE_POS)
+            button.update(SCREEN)
+            
+        # handles the user input for the tictactoe board
         for event in pygame.event.get():
             if ticTacToegame.isWin():
                 endGame(winner = ticTacToegame.getWinner())
