@@ -107,31 +107,161 @@ def onePlayer():
     BottomMiddleClicked = False
     BottomRightClicked = False
     while True:
-        # global mouse position
+        # play mouse position
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
 
-        # might add a follow up screen for hard vs easy buttons for player one
+        # sets backgound color to white
         SCREEN.fill(WHITE)
+        
 
-        PLAY_TEXT = getFont(45).render("This is the One Player.", True, BLACK)
-        PLAY_RECT = PLAY_TEXT.get_rect(center=(320, 240))
+        # displays who turn it is at the top of the screen
+        if playersTurn == 0:
+            PLAY_TEXT = getFont(25).render("It is Player One's Turn:", True, BLACK)
+        else:
+            PLAY_TEXT = getFont(25).render("It is CPU's Turn", True, BLACK)
+            ticTacToegame.cpuTurn()
+            if( ticTacToegame.getStringAtCoordinate(0,0) != '---'):
+                TopLeftClicked = True
+            elif( ticTacToegame.getStringAtCoordinate(0,1) != '---'):
+                TopMiddleClicked = True
+            elif( ticTacToegame.getStringAtCoordinate(0,2) != '---'):
+                TopRightClicked = True
+            elif( ticTacToegame.getStringAtCoordinate(1,0) != '---'):
+                MiddleLeftClicked = True
+            elif( ticTacToegame.getStringAtCoordinate(1,1) != '---'):
+                MiddleClicked = True
+            elif( ticTacToegame.getStringAtCoordinate(1,2) != '---'):
+                MiddleRightClicked = True
+            elif( ticTacToegame.getStringAtCoordinate(2,0) != '---'):
+                BottomLeftClicked = True
+            elif( ticTacToegame.getStringAtCoordinate(2,1) != '---'):
+                BottomMiddleClicked = True
+            elif( ticTacToegame.getStringAtCoordinate(2,2) != '---'):
+                BottomRightClicked = True
+            playersTurn = 0
+
+        
+        
+            
+
+        # displays the text of whos turn it is
+        PLAY_RECT = PLAY_TEXT.get_rect(center=(320, 40))
         SCREEN.blit(PLAY_TEXT, PLAY_RECT)
 
-        PLAY_BACK = Button(image=None, pos=(340, 340),
-                           textInput="BACK", font=getFont(75),
-                           baseColor=BLACK, hoveringColor=GREEN, beenClicked = False)
+        # buttons for all of the board spaces on the tictactoe board
+        TopLeft = Button(image=None, pos=(125, 120),
+                           textInput=ticTacToegame.getStringAtCoordinate(0,0), font=getFont(75),
+                           baseColor=BLACK, hoveringColor=GREEN, beenClicked=TopLeftClicked)
+        
+        TopMiddle = Button(image=None, pos=(300, 120),
+                               textInput=ticTacToegame.getStringAtCoordinate(0,1), font=getFont(75),
+                               baseColor=BLACK, hoveringColor=GREEN, beenClicked=TopMiddleClicked)
 
-        PLAY_BACK.changeColor(PLAY_MOUSE_POS)
-        PLAY_BACK.update(SCREEN)
+        TopRight = Button(image=None, pos=(475, 120),
+                               textInput=ticTacToegame.getStringAtCoordinate(0,2), font=getFont(75),
+                               baseColor=BLACK, hoveringColor=GREEN, beenClicked=TopRightClicked)
 
+        MiddleLeft = Button(image=None, pos=(125, 250),
+                               textInput=ticTacToegame.getStringAtCoordinate(1,0), font=getFont(75),
+                               baseColor=BLACK, hoveringColor=GREEN, beenClicked=MiddleLeftClicked)
+            
+        Middle = Button(image=None, pos=(300, 250),
+                               textInput=ticTacToegame.getStringAtCoordinate(1,1), font=getFont(75),
+                               baseColor=BLACK, hoveringColor=GREEN, beenClicked=MiddleClicked)
+
+        MiddleRight = Button(image=None, pos=(475, 250),
+                               textInput=ticTacToegame.getStringAtCoordinate(1,2), font=getFont(75),
+                               baseColor=BLACK, hoveringColor=GREEN, beenClicked=MiddleRightClicked)
+
+        BottomLeft = Button(image=None, pos=(125, 390),
+                               textInput=ticTacToegame.getStringAtCoordinate(2,0), font=getFont(75),
+                               baseColor=BLACK, hoveringColor=GREEN, beenClicked=BottomLeftClicked)
+            
+        BottomMiddle = Button(image=None, pos=(300, 390),
+                               textInput=ticTacToegame.getStringAtCoordinate(2,1), font=getFont(75),
+                               baseColor=BLACK, hoveringColor=GREEN, beenClicked=BottomMiddleClicked)
+
+        BottomRight = Button(image=None, pos=(475, 390),
+                               textInput=ticTacToegame.getStringAtCoordinate(2,2), font=getFont(75),
+                               baseColor=BLACK, hoveringColor=GREEN, beenClicked=BottomRightClicked)
+
+        # draws the game board for tictactoe
+        pygame.draw.line(SCREEN, BLACK, (400, 60), (400, 460), 4)
+        pygame.draw.line(SCREEN, BLACK, (200, 60), (200, 460), 4)
+        pygame.draw.line(SCREEN, BLACK, (75, 180), (525, 180), 4)
+        pygame.draw.line(SCREEN, BLACK, (75, 320), (525, 320), 4)
+
+        # displays all the buttons on the gameboard
+        for button in [TopLeft, TopMiddle, TopRight, MiddleLeft, Middle, MiddleRight,
+                       BottomLeft, BottomMiddle, BottomRight]:
+            button.changeColor(PLAY_MOUSE_POS)
+            button.update(SCREEN)
+
+        # handles the user input for the tictactoe board
         for event in pygame.event.get():
+            if ticTacToegame.isWin():
+                endGame(winner = ticTacToegame.getWinner())
+            elif ticTacToegame.isBoardFull():
+                endGame(winner = ticTacToegame.getWinner())
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if PLAY_BACK.checkForInput(PLAY_MOUSE_POS):
-                    main_menu()
-
+                if TopLeft.checkForInput(PLAY_MOUSE_POS):
+                    if playersTurn == 0:
+                        TopLeftClicked = True
+                        ticTacToegame.setStringAtCoordinate( 'X', 0, 0 )
+                        playersTurn = 1
+                        ticTacToegame.incrementMoves()
+                elif TopMiddle.checkForInput(PLAY_MOUSE_POS):
+                    if playersTurn == 0:
+                        TopMiddleClicked = True
+                        ticTacToegame.setStringAtCoordinate( 'X', 0, 1 )
+                        playersTurn = 1
+                        ticTacToegame.incrementMoves()
+                elif TopRight.checkForInput(PLAY_MOUSE_POS):
+                    if playersTurn == 0:
+                        TopRightClicked = True
+                        ticTacToegame.setStringAtCoordinate( 'X', 0, 2 )
+                        playersTurn = 1
+                        ticTacToegame.incrementMoves()
+                elif Middle.checkForInput(PLAY_MOUSE_POS):
+                    if playersTurn == 0:
+                        playersTurn = 1
+                        MiddleClicked = True
+                        ticTacToegame.setStringAtCoordinate( 'X', 1, 1 )
+                        ticTacToegame.incrementMoves()
+                elif MiddleRight.checkForInput(PLAY_MOUSE_POS):
+                    if playersTurn == 0:
+                        playersTurn = 1
+                        MiddleRightClicked = True
+                        ticTacToegame.setStringAtCoordinate( 'X', 1, 2 )
+                        ticTacToegame.incrementMoves()
+                elif MiddleLeft.checkForInput(PLAY_MOUSE_POS):
+                    if playersTurn == 0:
+                        playersTurn = 1
+                        MiddleLeftClicked = True
+                        ticTacToegame.setStringAtCoordinate( 'X', 1, 0 )
+                        ticTacToegame.incrementMoves()
+                elif BottomMiddle.checkForInput(PLAY_MOUSE_POS):
+                    if playersTurn == 0:
+                        playersTurn = 1
+                        BottomMiddleClicked = True
+                        ticTacToegame.setStringAtCoordinate( 'X', 2, 1 )
+                        ticTacToegame.incrementMoves()
+                elif BottomRight.checkForInput(PLAY_MOUSE_POS):
+                    if playersTurn == 0:
+                        playersTurn = 1
+                        BottomRightClicked = True
+                        ticTacToegame.setStringAtCoordinate( 'X', 2, 2 )
+                        ticTacToegame.incrementMoves()
+                elif BottomLeft.checkForInput(PLAY_MOUSE_POS):
+                    if playersTurn == 0:
+                        playersTurn = 1
+                        BottomLeftClicked = True
+                        ticTacToegame.setStringAtCoordinate( 'X', 2, 0 )
+                        ticTacToegame.incrementMoves()
+                
         pygame.display.update()
 
 # runs this function if playing PVP
