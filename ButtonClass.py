@@ -1,10 +1,10 @@
 class Button():
-    def __init__(self, image, pos, textInput, font, baseColor, hoveringColor):
+    def __init__(self, image, pos, textInput, font, baseColor, hoveringColor, beenClicked):
         self.image = image
         self.xPos = pos[0]
         self.yPos = pos[1]
         self.font = font
-        self.beenClicked = False
+        self.beenClicked = beenClicked
         self.baseColor, self.hoveringColor = baseColor, hoveringColor
         self.textInput = textInput
         self.text = self.font.render(self.textInput, True, self.baseColor)
@@ -17,10 +17,9 @@ class Button():
 
 
     def update(self, screen):
-        if self.beenClicked == False:
-            if self.image is not None:
-                screen.blit(self.image, self.rect)
-            screen.blit(self.text, self.text_rect)
+        if self.image is not None:
+            screen.blit(self.image, self.rect)
+        screen.blit(self.text, self.text_rect)
 
 
     def checkForInput(self, position):
