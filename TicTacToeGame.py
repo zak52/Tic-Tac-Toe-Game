@@ -184,6 +184,33 @@ class TicTacToe():
             else:
                 self.getStringAtCoordinate('O', 1, 1)
 
+        elif self.moves == 3:
+            if self.getStringAtCoordinate(1, 1) == 'X':
+                if self.getStringAtCoordinate(0, 1) == 'O':
+                    cpuMove = random.randint(0,1)
+                    if cpuMove == 0:
+                        self.setStringAtCoordinate('O', 1, 0)
+                    elif cpuMove == 0:
+                        self.setStringAtCoordinate('O', 1, 2)
+                elif self.getStringAtCoordinate(1, 0) == 'O':
+                    cpuMove = random.randint(0,1)
+                    if cpuMove == 0:
+                        self.setStringAtCoordinate('O', 0, 1)
+                    elif cpuMove == 0:
+                        self.setStringAtCoordinate('O', 2, 1)
+                elif self.getStringAtCoordinate(2, 1) == 'O':
+                    cpuMove = random.randint(0,1)
+                    if cpuMove == 0:
+                        self.setStringAtCoordinate('O', 1, 0)
+                    elif cpuMove == 0:
+                        self.setStringAtCoordinate('O', 1, 2)
+                elif self.getStringAtCoordinate(1, 2) == 'O':
+                    cpuMove = random.randint(0,1)
+                    if cpuMove == 0:
+                        self.setStringAtCoordinate('O', 2, 1)
+                    elif cpuMove == 0:
+                        self.setStringAtCoordinate('O', 0, 1)
+                        
         return True
         
         
