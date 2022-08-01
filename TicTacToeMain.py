@@ -86,23 +86,127 @@ def twoPlayer():
         PLAY_RECT = PLAY_TEXT.get_rect(center=(320, 40))
         SCREEN.blit(PLAY_TEXT, PLAY_RECT)
 
-        nextTurn = Button(image=None, pos=(340, 340),
-                           textInput="Next Turn", font=getFont(75),
+
+        TopLeft = Button(image=None, pos=(125, 120),
+                           textInput="---", font=getFont(75),
+                           baseColor=BLACK, hoveringColor=GREEN)
+        
+        TopMiddle = Button(image=None, pos=(300, 120),
+                           textInput="---", font=getFont(75),
                            baseColor=BLACK, hoveringColor=GREEN)
 
-        nextTurn.changeColor(PLAY_MOUSE_POS)
-        nextTurn.update(SCREEN)
+        TopRight = Button(image=None, pos=(475, 120),
+                           textInput="---", font=getFont(75),
+                           baseColor=BLACK, hoveringColor=GREEN)
+
+        MiddleLeft = Button(image=None, pos=(125, 250),
+                           textInput="---", font=getFont(75),
+                           baseColor=BLACK, hoveringColor=GREEN)
+        
+        Middle = Button(image=None, pos=(300, 250),
+                           textInput="---", font=getFont(75),
+                           baseColor=BLACK, hoveringColor=GREEN)
+
+        MiddleRight = Button(image=None, pos=(475, 250),
+                           textInput="---", font=getFont(75),
+                           baseColor=BLACK, hoveringColor=GREEN)
+
+        BottomLeft = Button(image=None, pos=(125, 390),
+                           textInput="---", font=getFont(75),
+                           baseColor=BLACK, hoveringColor=GREEN)
+        
+        BottomMiddle = Button(image=None, pos=(300, 390),
+                           textInput="---", font=getFont(75),
+                           baseColor=BLACK, hoveringColor=GREEN)
+
+        BottomRight = Button(image=None, pos=(475, 390),
+                           textInput="---", font=getFont(75),
+                           baseColor=BLACK, hoveringColor=GREEN)
+        
+
+        pygame.draw.line(SCREEN, BLACK, (400, 60), (400, 460), 4)
+        pygame.draw.line(SCREEN, BLACK, (200, 60), (200, 460), 4)
+        pygame.draw.line(SCREEN, BLACK, (75, 180), (525, 180), 4)
+        pygame.draw.line(SCREEN, BLACK, (75, 320), (525, 320), 4)
+
+        TopLeft.changeColor(PLAY_MOUSE_POS)
+        TopLeft.update(SCREEN)
+
+        TopMiddle.changeColor(PLAY_MOUSE_POS)
+        TopMiddle.update(SCREEN)
+
+        TopRight.changeColor(PLAY_MOUSE_POS)
+        TopRight.update(SCREEN)
+
+        MiddleLeft.changeColor(PLAY_MOUSE_POS)
+        MiddleLeft.update(SCREEN)
+
+        Middle.changeColor(PLAY_MOUSE_POS)
+        Middle.update(SCREEN)
+
+        MiddleRight.changeColor(PLAY_MOUSE_POS)
+        MiddleRight.update(SCREEN)
+
+        BottomLeft.changeColor(PLAY_MOUSE_POS)
+        BottomLeft.update(SCREEN)
+
+        BottomMiddle.changeColor(PLAY_MOUSE_POS)
+        BottomMiddle.update(SCREEN)
+
+        BottomRight.changeColor(PLAY_MOUSE_POS)
+        BottomRight.update(SCREEN)
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if nextTurn.checkForInput(PLAY_MOUSE_POS):
+                if TopLeft.checkForInput(PLAY_MOUSE_POS):
                     if playersTurn == 0:
                         playersTurn = 1
                     else:
                         playersTurn = 0
+                elif TopMiddle.checkForInput(PLAY_MOUSE_POS):
+                    if playersTurn == 0:
+                        playersTurn = 1
+                    else:
+                        playersTurn = 0
+                elif TopRight.checkForInput(PLAY_MOUSE_POS):
+                    if playersTurn == 0:
+                        playersTurn = 1
+                    else:
+                        playersTurn = 0
+                elif Middle.checkForInput(PLAY_MOUSE_POS):
+                    if playersTurn == 0:
+                        playersTurn = 1
+                    else:
+                        playersTurn = 0
+                elif MiddleRight.checkForInput(PLAY_MOUSE_POS):
+                    if playersTurn == 0:
+                        playersTurn = 1
+                    else:
+                        playersTurn = 0
+                elif MiddleLeft.checkForInput(PLAY_MOUSE_POS):
+                    if playersTurn == 0:
+                        playersTurn = 1
+                    else:
+                        playersTurn = 0
+                elif BottomMiddle.checkForInput(PLAY_MOUSE_POS):
+                    if playersTurn == 0:
+                        playersTurn = 1
+                    else:
+                        playersTurn = 0
+                elif BottomRight.checkForInput(PLAY_MOUSE_POS):
+                    if playersTurn == 0:
+                        playersTurn = 1
+                    else:
+                        playersTurn = 0
+                elif BottomLeft.checkForInput(PLAY_MOUSE_POS):
+                    if playersTurn == 0:
+                        playersTurn = 1
+                    else:
+                        playersTurn = 0
+                
         pygame.display.update()
 
 
