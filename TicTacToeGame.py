@@ -125,26 +125,19 @@ class TicTacToe():
 
         self.incrementMoves()
 
+        # checks to see if cpu is moving first
         if self.moves == 1 and self.isBoardEmpty():
-            openingMove = random.randint(0, 7)
+            openingMove = random.randint(0, 3)
             if openingMove == 0:
-                self.setStringAtCoordinate('O', 0, 0)
-            elif openingMove == 1:
-                self.setStringAtCoordinate('O', 0, 2)
-            elif openingMove == 2:
-                self.setStringAtCoordinate('O', 2, 0)
-            elif openingMove == 3:
-                self.setStringAtCoordinate('O', 2, 2)
-            elif openingMove == 4:
                 self.setStringAtCoordinate('O', 0, 1)
-            elif openingMove == 5:
+            elif openingMove == 1:
                 self.setStringAtCoordinate('O', 1, 0)
-            elif openingMove == 6:
+            elif openingMove == 2:
                 self.setStringAtCoordinate('O', 1, 2)
-            elif openingMove == 7:
+            elif openingMove == 3:
                 self.setStringAtCoordinate('O', 2, 1)
-                
 
+        # checks to see if cpu is moving second
         elif self.moves == 2:
             if self.getStringAtCoordinate(1, 1) == 'X':
                 cpuMove = random.randint(0, 3)
@@ -158,33 +151,19 @@ class TicTacToe():
                     self.setStringAtCoordinate('O', 2, 2)
                     
             elif self.getStringAtCoordinate(0, 1) == 'X':
-                cpuMove = random.randint(0,1)
-                if cpuMove == 0:
-                    self.setStringAtCoordinate('O', 0, 0)
-                elif cpuMove == 0:
-                    self.setStringAtCoordinate('O', 0, 2)
+                self.setStringAtCoordinate('O', 2, 1)
             elif self.getStringAtCoordinate(1, 0) == 'X':
-                cpuMove = random.randint(0,1)
-                if cpuMove == 0:
-                    self.setStringAtCoordinate('O', 0, 0)
-                elif cpuMove == 1:
-                    self.setStringAtCoordinate('O', 2, 0)
+                self.setStringAtCoordinate('O', 1, 2)
             elif self.getStringAtCoordinate(1, 2) == 'X':
-                cpuMove = random.randint(0,1)
-                if cpuMove == 0:
-                    self.setStringAtCoordinate('O', 0, 2)
-                elif cpuMove == 1:
-                    self.setStringAtCoordinate('O', 2, 2)
+                self.setStringAtCoordinate('O', 1, 0)
             elif self.getStringAtCoordinate(2, 1) == 'X':
-                cpuMove = random.randint(0,1)
-                if cpuMove == 0:
-                    self.setStringAtCoordinate('O', 2, 0)
-                elif cpuMove == 1:
-                    self.setStringAtCoordinate('O', 2, 2)
+                self.setStringAtCoordinate('O', 0, 1)
             else:
-                self.getStringAtCoordinate('O', 1, 1)
+                self.setStringAtCoordinate('O', 1, 1)
 
+        # checks to see if cpu is moved first
         elif self.moves == 3:
+            # checks to see if the X in the middle
             if self.getStringAtCoordinate(1, 1) == 'X':
                 if self.getStringAtCoordinate(0, 1) == 'O':
                     cpuMove = random.randint(0,1)
@@ -210,6 +189,217 @@ class TicTacToe():
                         self.setStringAtCoordinate('O', 2, 1)
                     elif cpuMove == 0:
                         self.setStringAtCoordinate('O', 0, 1)
+            # checks to see if the X in the top left
+            elif self.getStringAtCoordinate(0, 0) == 'X':
+                if self.getStringAtCoordinate(0, 1) == 'O':
+                    self.setStringAtCoordinate('O', 1, 0)
+                elif self.getStringAtCoordinate(1, 0) == 'O':
+                    self.setStringAtCoordinate('O', 0, 1)
+                elif self.getStringAtCoordinate(2, 1) == 'O':
+                    self.setStringAtCoordinate('O', 2, 0)
+                elif self.getStringAtCoordinate(1, 2) == 'O':
+                    self.setStringAtCoordinate('O', 2, 2)
+            # checks to see if the X in the top middle
+            elif self.getStringAtCoordinate(0, 1) == 'X':
+                if self.getStringAtCoordinate(1, 0) == 'O':
+                    self.setStringAtCoordinate('O', 0, 0)
+                elif self.getStringAtCoordinate(2, 1) == 'O':
+                    self.setStringAtCoordinate('O', 2, 0)
+                elif self.getStringAtCoordinate(1, 2) == 'O':
+                    self.setStringAtCoordinate('O', 0, 2)
+            # checks to see if the X in the top right
+            elif self.getStringAtCoordinate(0, 2) == 'X':
+                if self.getStringAtCoordinate(0, 1) == 'O':
+                    self.setStringAtCoordinate('O', 1, 2)
+                elif self.getStringAtCoordinate(1, 0) == 'O':
+                    self.setStringAtCoordinate('O', 1, 0)
+                elif self.getStringAtCoordinate(2, 1) == 'O':
+                    self.setStringAtCoordinate('O', 2, 2)
+                elif self.getStringAtCoordinate(1, 2) == 'O':
+                    self.setStringAtCoordinate('O', 0, 1)
+            # checks to see if the X in the middle left
+            elif self.getStringAtCoordinate(1, 0) == 'X':
+                if self.getStringAtCoordinate(0, 1) == 'O':
+                    self.setStringAtCoordinate('O', 0, 0)
+                elif self.getStringAtCoordinate(1, 2) == 'O':
+                    self.setStringAtCoordinate('O', 0, 2)
+                elif self.getStringAtCoordinate(2, 1) == 'O':
+                    self.setStringAtCoordinate('O', 2, 1)
+            # checks to see if the X in the middle right
+            elif self.getStringAtCoordinate(1, 2) == 'X':
+                if self.getStringAtCoordinate(0, 1) == 'O':
+                    self.setStringAtCoordinate('O', 0, 2)
+                elif self.getStringAtCoordinate(1, 0) == 'O':
+                    self.setStringAtCoordinate('O', 0, 0)
+                elif self.getStringAtCoordinate(2, 1) == 'O':
+                    self.setStringAtCoordinate('O', 2, 2)
+            # checks to see if the X in the bottom left
+            elif self.getStringAtCoordinate(2, 0) == 'X':
+                if self.getStringAtCoordinate(0, 1) == 'O':
+                    self.setStringAtCoordinate('O', 0, 0)
+                elif self.getStringAtCoordinate(1, 0) == 'O':
+                    self.setStringAtCoordinate('O', 2, 1)
+                elif self.getStringAtCoordinate(2, 1) == 'O':
+                    self.setStringAtCoordinate('O', 1, 0)
+                elif self.getStringAtCoordinate(1, 2) == 'O':
+                    self.setStringAtCoordinate('O', 0, 2)
+            # checks to see if the X in the bottom middle
+            elif self.getStringAtCoordinate(2, 1) == 'X':
+                if self.getStringAtCoordinate(0, 1) == 'O':
+                    self.setStringAtCoordinate('O', 0, 0)
+                elif self.getStringAtCoordinate(1, 0) == 'O':
+                    self.setStringAtCoordinate('O', 2, 0)
+                elif self.getStringAtCoordinate(1, 2) == 'O':
+                    self.setStringAtCoordinate('O', 2, 2)
+            # checks to see if the X in the bottom right
+            elif self.getStringAtCoordinate(2, 2) == 'X':
+                if self.getStringAtCoordinate(0, 1) == 'O':
+                    self.setStringAtCoordinate('O', 0, 2)
+                elif self.getStringAtCoordinate(1, 0) == 'O':
+                    self.setStringAtCoordinate('O', 2, 0)
+                elif self.getStringAtCoordinate(2, 1) == 'O':
+                    self.setStringAtCoordinate('O', 1, 2)
+                elif self.getStringAtCoordinate(1, 2) == 'O':
+                    self.setStringAtCoordinate('O', 2, 1)
+
+        # checks to see if cpu is moved second
+        elif self.moves == 4:
+            # checks to see if x is in the middle and all possiblities
+            if self.getStringAtCoordinate(1, 1) == 'X':
+                if self.getStringAtCoordinate(0, 0) == 'X':
+                    self.setStringAtCoordinate('O', 2, 2)
+                elif self.getStringAtCoordinate(0, 1) == 'X':
+                    self.setStringAtCoordinate('O', 2, 1)
+                elif self.getStringAtCoordinate(0, 2) == 'X':
+                    self.setStringAtCoordinate('O', 2, 0)
+                elif self.getStringAtCoordinate(1, 0) == 'X':
+                    self.setStringAtCoordinate('O', 1, 2)
+                elif self.getStringAtCoordinate(1, 2) == 'X':
+                    self.setStringAtCoordinate('O', 1, 0)
+                elif self.getStringAtCoordinate(2, 0) == 'X':
+                    self.setStringAtCoordinate('O', 0, 2)
+                elif self.getStringAtCoordinate(2, 0) == 'X':
+                    self.setStringAtCoordinate('O', 0, 2)
+                elif self.getStringAtCoordinate(2, 1) == 'X':
+                    self.setStringAtCoordinate('O', 0, 1)
+                elif self.getStringAtCoordinate(2, 2) == 'X':
+                    self.setStringAtCoordinate('O', 0, 0)
+            # checks to see if x is in the top left and all possiblities
+            elif self.getStringAtCoordinate(0, 0) == 'X':
+                if self.getStringAtCoordinate(0, 1) == 'X':
+                    self.setStringAtCoordinate('O', 0, 2)
+                elif self.getStringAtCoordinate(0, 2) == 'X':
+                    self.setStringAtCoordinate('O', 0, 1)
+                elif self.getStringAtCoordinate(1, 0) == 'X':
+                    self.setStringAtCoordinate('O', 2, 0)
+                elif self.getStringAtCoordinate(2, 0) == 'X':
+                    self.setStringAtCoordinate('O', 1, 0)
+                elif self.getStringAtCoordinate(2, 1) == 'X':
+                    self.setStringAtCoordinate('O', 2, 0)
+                elif self.getStringAtCoordinate(2, 2) == 'X':
+                    self.setStringAtCoordinate('O', 1, 0)
+                elif self.getStringAtCoordinate(1, 2) == 'X':
+                    self.setStringAtCoordinate('O', 0, 1)
+            # checks to see if x is in the top middle and all possiblities
+            elif self.getStringAtCoordinate(0, 1) == 'X':
+                if self.getStringAtCoordinate(0, 2) == 'X':
+                    self.setStringAtCoordinate('O', 0, 0)
+                elif self.getStringAtCoordinate(1, 0) == 'X':
+                    self.setStringAtCoordinate('O', 0, 2)
+                elif self.getStringAtCoordinate(1, 1) == 'X':
+                    self.setStringAtCoordinate('O', 2, 0)
+                elif self.getStringAtCoordinate(1, 2) == 'X':
+                    self.setStringAtCoordinate('O', 0, 0)
+                elif self.getStringAtCoordinate(2, 0) == 'X':
+                    self.setStringAtCoordinate('O', 1, 2)
+                elif self.getStringAtCoordinate(2, 2) == 'X':
+                    self.setStringAtCoordinate('O', 0, 0)
+            # checks to see if x is in the top right and all possiblities
+            elif self.getStringAtCoordinate(0, 1) == 'X':
+                if self.getStringAtCoordinate(1, 0) == 'X':
+                    self.setStringAtCoordinate('O', 0, 0)
+                elif self.getStringAtCoordinate(1, 2) == 'X':
+                    self.setStringAtCoordinate('O', 2, 2)
+                elif self.getStringAtCoordinate(2, 0) == 'X':
+                    self.setStringAtCoordinate('O', 0, 1)
+                elif self.getStringAtCoordinate(2, 1) == 'X':
+                    self.setStringAtCoordinate('O', 2, 2)
+                elif self.getStringAtCoordinate(2, 0) == 'X':
+                    self.setStringAtCoordinate('O', 1, 2)
+                elif self.getStringAtCoordinate(2, 2) == 'X':
+                    self.setStringAtCoordinate('O', 1, 2)
+            # checks to see if x is in the middle left and all possiblities
+            elif self.getStringAtCoordinate(1, 0) == 'X':
+                if self.getStringAtCoordinate(0, 0) == 'X':
+                    self.setStringAtCoordinate('O', 2, 0)
+                elif self.getStringAtCoordinate(0, 1) == 'X':
+                    self.setStringAtCoordinate('O', 2, 0)
+                elif self.getStringAtCoordinate(0, 2) == 'X':
+                    self.setStringAtCoordinate('O', 2, 0)
+                elif self.getStringAtCoordinate(1, 1) == 'X':
+                    self.setStringAtCoordinate('O', 0, 2)
+                elif self.getStringAtCoordinate(2, 0) == 'X':
+                    self.setStringAtCoordinate('O', 0, 0)
+                elif self.getStringAtCoordinate(2, 1) == 'X':
+                    self.setStringAtCoordinate('O', 0, 0)
+                elif self.getStringAtCoordinate(2, 2) == 'X':
+                    self.setStringAtCoordinate('O', 0, 0)
+            # checks to see if x is in the middle right and all possiblities
+            elif self.getStringAtCoordinate(1, 2) == 'X':
+                if self.getStringAtCoordinate(0, 0) == 'X':
+                    self.setStringAtCoordinate('O', 2, 2)
+                elif self.getStringAtCoordinate(0, 1) == 'X':
+                    self.setStringAtCoordinate('O', 2, 2)
+                elif self.getStringAtCoordinate(1, 1) == 'X':
+                    self.setStringAtCoordinate('O', 0, 0)
+                elif self.getStringAtCoordinate(2, 0) == 'X':
+                    self.setStringAtCoordinate('O', 0, 2)
+                elif self.getStringAtCoordinate(2, 1) == 'X':
+                    self.setStringAtCoordinate('O', 0, 2)
+                elif self.getStringAtCoordinate(2, 2) == 'X':
+                    self.setStringAtCoordinate('O', 0, 2)
+            # checks to see if x is in the bottom left and all possiblities
+            elif self.getStringAtCoordinate(2, 0) == 'X':
+                if self.getStringAtCoordinate(0, 1) == 'X':
+                    self.setStringAtCoordinate('O', 0, 0)
+                elif self.getStringAtCoordinate(0, 2) == 'X':
+                    self.setStringAtCoordinate('O', 0, 1)
+                elif self.getStringAtCoordinate(1, 2) == 'X':
+                    self.setStringAtCoordinate('O', 2, 2)
+                elif self.getStringAtCoordinate(2, 1) == 'X':
+                    self.setStringAtCoordinate('O', 2, 2)
+                elif self.getStringAtCoordinate(2, 2) == 'X':
+                    self.setStringAtCoordinate('O', 2, 1)
+            # checks to see if x is in the bottom middle and all possiblities
+            elif self.getStringAtCoordinate(2, 1) == 'X':
+                if self.getStringAtCoordinate(0, 0) == 'X':
+                    self.setStringAtCoordinate('O', 2, 2)
+                elif self.getStringAtCoordinate(0, 2) == 'X':
+                    self.setStringAtCoordinate('O', 2, 0)
+                elif self.getStringAtCoordinate(1, 0) == 'X':
+                    self.setStringAtCoordinate('O', 2, 2)
+                elif self.getStringAtCoordinate(1, 1) == 'X':
+                    self.setStringAtCoordinate('O', 0, 0)
+                elif self.getStringAtCoordinate(1, 2) == 'X':
+                    self.setStringAtCoordinate('O', 2, 0)
+                elif self.getStringAtCoordinate(2, 2) == 'X':
+                    self.setStringAtCoordinate('O', 2, 0)
+            # checks to see if x is in the bottom right and all possiblities
+            elif self.getStringAtCoordinate(2, 2) == 'X':
+                if self.getStringAtCoordinate(0, 0) == 'X':
+                    self.setStringAtCoordinate('O', 0, 1)
+                elif self.getStringAtCoordinate(0, 1) == 'X':
+                    self.setStringAtCoordinate('O', 0, 2)
+                elif self.getStringAtCoordinate(1, 0) == 'X':
+                    self.setStringAtCoordinate('O', 2, 0)
+                elif self.getStringAtCoordinate(1, 2) == 'X':
+                    self.setStringAtCoordinate('O', 0, 2)
+                elif self.getStringAtCoordinate(2, 1) == 'X':
+                    self.setStringAtCoordinate('O', 2, 0)
+
+        # checks to see if cpu is moved first
+        elif self.moves == 5:
+            return True
                         
         return True
         
