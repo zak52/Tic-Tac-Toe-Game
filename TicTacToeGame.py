@@ -399,7 +399,42 @@ class TicTacToe():
 
         # checks to see if cpu is moved first
         elif self.moves == 5:
-            return True
+            # checks to see if the X in the middle
+            if self.getStringAtCoordinate(1, 1) == 'X':
+                if self.getStringAtCoordinate(0, 1) == 'O':
+                    if self.getStringAtCoordinate(1, 0) == 'O':
+                        if self.getStringAtCoordinate(0, 0) != 'X':
+                            self.setStringAtCoordinate('O', 0, 0)
+                        elif self.getStringAtCoordiant(0, 0) == 'X':
+                            self.setStringAtCoordinate('O', 2, 2)
+                    elif self.getStringAtCoordinate(1, 2) == 'O':
+                        if self.getStringAtCoordinate(0, 2) != 'X':
+                            self.setStringAtCoordinate('O', 0, 2)
+                        elif self.getStringAtCoordiant(0, 2) == 'X':
+                            self.setStringAtCoordinate('O', 2, 0)
+                elif self.getStringAtCoordinate(1, 0) == 'O':
+                    if self.getStringAtCoordinate(0, 1) == 'O':
+                        if self.getStringAtCoordinate(0, 0) != 'X':
+                            self.setStringAtCoordinate('O', 0, 0)
+                        elif self.getStringAtCoordiant(0, 0) == 'X':
+                            self.setStringAtCoordinate('O', 2, 2)
+                    elif self.getStringAtCoordinate(1, 2) == 'O':
+                        if self.getStringAtCoordinate(2, 1) != 'X':
+                            self.setStringAtCoordinate('O', 2, 0)
+                        elif self.getStringAtCoordiant(2, 1) == 'X':
+                            self.setStringAtCoordinate('O', 0, 2)
+                elif self.getStringAtCoordinate(2, 1) == 'O':
+                    cpuMove = random.randint(0,1)
+                    if cpuMove == 0:
+                        self.setStringAtCoordinate('O', 1, 0)
+                    elif cpuMove == 0:
+                        self.setStringAtCoordinate('O', 1, 2)
+                elif self.getStringAtCoordinate(1, 2) == 'O':
+                    cpuMove = random.randint(0,1)
+                    if cpuMove == 0:
+                        self.setStringAtCoordinate('O', 2, 1)
+                    elif cpuMove == 0:
+                        self.setStringAtCoordinate('O', 0, 1)
                         
         return True
         
