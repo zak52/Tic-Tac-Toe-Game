@@ -119,7 +119,16 @@ def onePlayer():
             PLAY_TEXT = getFont(25).render("It is Player One's Turn:", True, BLACK)
         else:
             PLAY_TEXT = getFont(25).render("It is CPU's Turn", True, BLACK)
-            ticTacToegame.cpuTurn()
+            if ticTacToegame.getMove() == 0:
+                print("hit")
+                cpuMove = ticTacToegame.chooseRandomMove()
+            else: 
+                cpuMove = ticTacToegame.findBestMove()
+            ticTacToegame.incrementMoves()
+            print(cpuMove)
+            if cpuMove[0] > -1:
+                ticTacToegame.setStringAtCoordinate( 'O', cpuMove[0], cpuMove[1] )
+            
             if( ticTacToegame.getStringAtCoordinate(0,0) != '---'):
                 TopLeftClicked = True
             elif( ticTacToegame.getStringAtCoordinate(0,1) != '---'):
